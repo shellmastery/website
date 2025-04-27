@@ -1,40 +1,87 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Shell School - Master the Command Line</title>
-    <link>https://shellschool.github.io/website/</link>
-    <description>Recent content on Shell School - Master the Command Line</description>
-    <generator>Hugo</generator>
-    <language>en-us</language>
-    <lastBuildDate>Sat, 22 Mar 2025 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://shellschool.github.io/website/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Bash &#43; AI</title>
-      <link>https://shellschool.github.io/website/courses/bash-plus-ai/</link>
-      <pubDate>Sat, 22 Mar 2025 00:00:00 +0000</pubDate>
-      <guid>https://shellschool.github.io/website/courses/bash-plus-ai/</guid>
-      <description>&lt;p&gt;Explore the intersection of traditional Bash scripting with modern AI technology to build intelligent, self-optimizing scripts.&lt;/p&gt;&#xA;&lt;h2 id=&#34;what-you-will-learn&#34;&gt;What You Will Learn&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Integrate AI-driven tools with Bash workflows&lt;/li&gt;&#xA;&lt;li&gt;Automate data processing with intelligent scripts&lt;/li&gt;&#xA;&lt;li&gt;Build CLI interfaces to AI services and APIs&lt;/li&gt;&#xA;&lt;li&gt;Create self-optimizing and adaptive scripts&lt;/li&gt;&#xA;&lt;li&gt;Develop AI-powered monitoring and analysis tools&lt;/li&gt;&#xA;&lt;li&gt;Implement natural language processing in Bash&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;course-contents&#34;&gt;Course Contents&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Module 1: Introduction to AI Tools for the Command Line&lt;/li&gt;&#xA;&lt;li&gt;Module 2: Working with AI APIs in Bash&lt;/li&gt;&#xA;&lt;li&gt;Module 3: Text and Data Processing with AI&lt;/li&gt;&#xA;&lt;li&gt;Module 4: Building AI-enhanced CLI Tools&lt;/li&gt;&#xA;&lt;li&gt;Module 5: Intelligent Automation and Optimization&lt;/li&gt;&#xA;&lt;li&gt;Module 6: Warp Terminal and Enhanced Shells&lt;/li&gt;&#xA;&lt;li&gt;Module 7: Local AI Model Integration with Bash&lt;/li&gt;&#xA;&lt;li&gt;Module 8: Advanced Project: Custom AI Assistant&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;why-this-course&#34;&gt;Why This Course?&lt;/h2&gt;&#xA;&lt;p&gt;This forward-looking course bridges the gap between traditional command line scripting and modern AI capabilities. You&amp;rsquo;ll learn how to leverage tools like sgpt, AI APIs, and advanced terminals to build scripts and workflows that can analyze, adapt, and optimize based on your needs. Perfect for developers looking to enhance their productivity with the latest AI advancements.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Bash for IT Professionals</title>
-      <link>https://shellschool.github.io/website/courses/bash-for-it-professionals/</link>
-      <pubDate>Sat, 22 Mar 2025 00:00:00 +0000</pubDate>
-      <guid>https://shellschool.github.io/website/courses/bash-for-it-professionals/</guid>
-      <description>&lt;p&gt;Designed explicitly for IT professionals, this course covers essential Bash skills for automating routine tasks.&lt;/p&gt;&#xA;&lt;h2 id=&#34;what-you-will-learn&#34;&gt;What You Will Learn&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Automate routine IT tasks and workflows&lt;/li&gt;&#xA;&lt;li&gt;Manage network operations efficiently&lt;/li&gt;&#xA;&lt;li&gt;Create troubleshooting scripts and tools&lt;/li&gt;&#xA;&lt;li&gt;Build file management and backup solutions&lt;/li&gt;&#xA;&lt;li&gt;Develop user and permission management systems&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;course-contents&#34;&gt;Course Contents&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Module 1: IT-focused Bash Fundamentals&lt;/li&gt;&#xA;&lt;li&gt;Module 2: File System Management Scripts&lt;/li&gt;&#xA;&lt;li&gt;Module 3: Network Monitoring and Automation&lt;/li&gt;&#xA;&lt;li&gt;Module 4: User Account Management&lt;/li&gt;&#xA;&lt;li&gt;Module 5: Backup and Restore Automation&lt;/li&gt;&#xA;&lt;li&gt;Module 6: Troubleshooting and Diagnostic Tools&lt;/li&gt;&#xA;&lt;li&gt;Module 7: Building Custom IT Utilities&lt;/li&gt;&#xA;&lt;li&gt;Module 8: IT Workflow Integration&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;why-this-course&#34;&gt;Why This Course?&lt;/h2&gt;&#xA;&lt;p&gt;This course bridges the gap between general Bash knowledge and practical IT applications. You&amp;rsquo;ll build scripts that solve real-world IT challenges, reduce repetitive tasks, and create tools that streamline your daily workflow. By the end, you&amp;rsquo;ll have a toolkit of scripts that can be immediately applied to your professional environment.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Bash for SysAdmins</title>
-      <link>https://shellschool.github.io/website/courses/bash-for-sysadmins/</link>
-      <pubDate>Sat, 22 Mar 2025 00:00:00 +0000</pubDate>
-      <guid>https://shellschool.github.io/website/courses/bash-for-sysadmins/</guid>
-      <description>&lt;p&gt;This course provides targeted Bash scripting training for SysAdmins, emphasizing automation of system monitoring, configuration management, and more.&lt;/p&gt;&#xA;&lt;h2 id=&#34;what-you-will-learn&#34;&gt;What You Will Learn&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Build comprehensive system monitoring solutions&lt;/li&gt;&#xA;&lt;li&gt;Automate configuration management tasks&lt;/li&gt;&#xA;&lt;li&gt;Create efficient user management systems&lt;/li&gt;&#xA;&lt;li&gt;Develop advanced backup and recovery scripts&lt;/li&gt;&#xA;&lt;li&gt;Implement security and system hardening tools&lt;/li&gt;&#xA;&lt;li&gt;Manage logging and analysis workflows&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;course-contents&#34;&gt;Course Contents&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Module 1: Advanced Bash for System Administration&lt;/li&gt;&#xA;&lt;li&gt;Module 2: System Monitoring and Alerting&lt;/li&gt;&#xA;&lt;li&gt;Module 3: Configuration Management Automation&lt;/li&gt;&#xA;&lt;li&gt;Module 4: Log Management and Analysis&lt;/li&gt;&#xA;&lt;li&gt;Module 5: Security and System Hardening&lt;/li&gt;&#xA;&lt;li&gt;Module 6: Service Management and Orchestration&lt;/li&gt;&#xA;&lt;li&gt;Module 7: Performance Tuning and Optimization&lt;/li&gt;&#xA;&lt;li&gt;Module 8: Disaster Recovery Planning&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;why-this-course&#34;&gt;Why This Course?&lt;/h2&gt;&#xA;&lt;p&gt;Designed specifically for system administrators, this course focuses on the tools, techniques, and scripts that will transform your daily administrative tasks. From automating routine maintenance to building comprehensive monitoring solutions, you&amp;rsquo;ll develop a powerful toolkit that scales across your infrastructure and reclaims your valuable time.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Pure Bash: Universal</title>
-      <link>https://shellschool.github.io/website/courses/pure-bash-universal/</link>
-      <pubDate>Sat, 22 Mar 2025 00:00:00 +0000</pubDate>
-      <guid>https://shellschool.github.io/website/courses/pure-bash-universal/</guid>
-      <description>&lt;p&gt;This unique course teaches you to harness the full power of Bash using strictly built-in commands and syntax.&lt;/p&gt;&#xA;&lt;h2 id=&#34;what-you-will-learn&#34;&gt;What You Will Learn&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Master core Bash syntax and built-in commands&lt;/li&gt;&#xA;&lt;li&gt;Create portable scripts that work across all platforms&lt;/li&gt;&#xA;&lt;li&gt;Handle data processing without external dependencies&lt;/li&gt;&#xA;&lt;li&gt;Develop efficient text processing techniques&lt;/li&gt;&#xA;&lt;li&gt;Build robust error handling and debugging skills&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;course-contents&#34;&gt;Course Contents&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Module 1: Bash Fundamentals&lt;/li&gt;&#xA;&lt;li&gt;Module 2: Variables and Data Types&lt;/li&gt;&#xA;&lt;li&gt;Module 3: Control Structures and Logic&lt;/li&gt;&#xA;&lt;li&gt;Module 4: Functions and Modularity&lt;/li&gt;&#xA;&lt;li&gt;Module 5: Text Processing with Built-ins&lt;/li&gt;&#xA;&lt;li&gt;Module 6: Error Handling and Debugging&lt;/li&gt;&#xA;&lt;li&gt;Module 7: Cross-Platform Considerations&lt;/li&gt;&#xA;&lt;li&gt;Module 8: Capstone Project&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;why-this-course&#34;&gt;Why This Course?&lt;/h2&gt;&#xA;&lt;p&gt;In a world of tool dependencies and compatibility issues, this course focuses on the power of pure Bash. You&amp;rsquo;ll learn to write scripts that run unchanged across Linux, macOS, and Windows environments, providing you with skills that translate across all Unix-like systems.&lt;/p&gt;</description>
-    </item>
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Shell School - Master the Command Line</title><link>https://shellschool.github.io/website/</link><description>Recent content on Shell School - Master the Command Line</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Sat, 22 Mar 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://shellschool.github.io/website/index.xml" rel="self" type="application/rss+xml"/><item><title>Bash + AI</title><link>https://shellschool.github.io/website/courses/bash-plus-ai/</link><pubDate>Sat, 22 Mar 2025 00:00:00 +0000</pubDate><guid>https://shellschool.github.io/website/courses/bash-plus-ai/</guid><description>&lt;p>Explore the intersection of traditional Bash scripting with modern AI technology to build intelligent, self-optimizing scripts.&lt;/p>
+&lt;h2 id="what-you-will-learn">What You Will Learn&lt;/h2>
+&lt;ul>
+&lt;li>Integrate AI-driven tools with Bash workflows&lt;/li>
+&lt;li>Automate data processing with intelligent scripts&lt;/li>
+&lt;li>Build CLI interfaces to AI services and APIs&lt;/li>
+&lt;li>Create self-optimizing and adaptive scripts&lt;/li>
+&lt;li>Develop AI-powered monitoring and analysis tools&lt;/li>
+&lt;li>Implement natural language processing in Bash&lt;/li>
+&lt;/ul>
+&lt;h2 id="course-contents">Course Contents&lt;/h2>
+&lt;ul>
+&lt;li>Module 1: Introduction to AI Tools for the Command Line&lt;/li>
+&lt;li>Module 2: Working with AI APIs in Bash&lt;/li>
+&lt;li>Module 3: Text and Data Processing with AI&lt;/li>
+&lt;li>Module 4: Building AI-enhanced CLI Tools&lt;/li>
+&lt;li>Module 5: Intelligent Automation and Optimization&lt;/li>
+&lt;li>Module 6: Warp Terminal and Enhanced Shells&lt;/li>
+&lt;li>Module 7: Local AI Model Integration with Bash&lt;/li>
+&lt;li>Module 8: Advanced Project: Custom AI Assistant&lt;/li>
+&lt;/ul>
+&lt;h2 id="why-this-course">Why This Course?&lt;/h2>
+&lt;p>This forward-looking course bridges the gap between traditional command line scripting and modern AI capabilities. You&amp;rsquo;ll learn how to leverage tools like sgpt, AI APIs, and advanced terminals to build scripts and workflows that can analyze, adapt, and optimize based on your needs. Perfect for developers looking to enhance their productivity with the latest AI advancements.&lt;/p></description></item><item><title>Bash for IT Professionals</title><link>https://shellschool.github.io/website/courses/bash-for-it-professionals/</link><pubDate>Sat, 22 Mar 2025 00:00:00 +0000</pubDate><guid>https://shellschool.github.io/website/courses/bash-for-it-professionals/</guid><description>&lt;p>Designed explicitly for IT professionals, this course covers essential Bash skills for automating routine tasks.&lt;/p>
+&lt;h2 id="what-you-will-learn">What You Will Learn&lt;/h2>
+&lt;ul>
+&lt;li>Automate routine IT tasks and workflows&lt;/li>
+&lt;li>Manage network operations efficiently&lt;/li>
+&lt;li>Create troubleshooting scripts and tools&lt;/li>
+&lt;li>Build file management and backup solutions&lt;/li>
+&lt;li>Develop user and permission management systems&lt;/li>
+&lt;/ul>
+&lt;h2 id="course-contents">Course Contents&lt;/h2>
+&lt;ul>
+&lt;li>Module 1: IT-focused Bash Fundamentals&lt;/li>
+&lt;li>Module 2: File System Management Scripts&lt;/li>
+&lt;li>Module 3: Network Monitoring and Automation&lt;/li>
+&lt;li>Module 4: User Account Management&lt;/li>
+&lt;li>Module 5: Backup and Restore Automation&lt;/li>
+&lt;li>Module 6: Troubleshooting and Diagnostic Tools&lt;/li>
+&lt;li>Module 7: Building Custom IT Utilities&lt;/li>
+&lt;li>Module 8: IT Workflow Integration&lt;/li>
+&lt;/ul>
+&lt;h2 id="why-this-course">Why This Course?&lt;/h2>
+&lt;p>This course bridges the gap between general Bash knowledge and practical IT applications. You&amp;rsquo;ll build scripts that solve real-world IT challenges, reduce repetitive tasks, and create tools that streamline your daily workflow. By the end, you&amp;rsquo;ll have a toolkit of scripts that can be immediately applied to your professional environment.&lt;/p></description></item><item><title>Bash for SysAdmins</title><link>https://shellschool.github.io/website/courses/bash-for-sysadmins/</link><pubDate>Sat, 22 Mar 2025 00:00:00 +0000</pubDate><guid>https://shellschool.github.io/website/courses/bash-for-sysadmins/</guid><description>&lt;p>This course provides targeted Bash scripting training for SysAdmins, emphasizing automation of system monitoring, configuration management, and more.&lt;/p>
+&lt;h2 id="what-you-will-learn">What You Will Learn&lt;/h2>
+&lt;ul>
+&lt;li>Build comprehensive system monitoring solutions&lt;/li>
+&lt;li>Automate configuration management tasks&lt;/li>
+&lt;li>Create efficient user management systems&lt;/li>
+&lt;li>Develop advanced backup and recovery scripts&lt;/li>
+&lt;li>Implement security and system hardening tools&lt;/li>
+&lt;li>Manage logging and analysis workflows&lt;/li>
+&lt;/ul>
+&lt;h2 id="course-contents">Course Contents&lt;/h2>
+&lt;ul>
+&lt;li>Module 1: Advanced Bash for System Administration&lt;/li>
+&lt;li>Module 2: System Monitoring and Alerting&lt;/li>
+&lt;li>Module 3: Configuration Management Automation&lt;/li>
+&lt;li>Module 4: Log Management and Analysis&lt;/li>
+&lt;li>Module 5: Security and System Hardening&lt;/li>
+&lt;li>Module 6: Service Management and Orchestration&lt;/li>
+&lt;li>Module 7: Performance Tuning and Optimization&lt;/li>
+&lt;li>Module 8: Disaster Recovery Planning&lt;/li>
+&lt;/ul>
+&lt;h2 id="why-this-course">Why This Course?&lt;/h2>
+&lt;p>Designed specifically for system administrators, this course focuses on the tools, techniques, and scripts that will transform your daily administrative tasks. From automating routine maintenance to building comprehensive monitoring solutions, you&amp;rsquo;ll develop a powerful toolkit that scales across your infrastructure and reclaims your valuable time.&lt;/p></description></item><item><title>Pure Bash: Universal</title><link>https://shellschool.github.io/website/courses/pure-bash-universal/</link><pubDate>Sat, 22 Mar 2025 00:00:00 +0000</pubDate><guid>https://shellschool.github.io/website/courses/pure-bash-universal/</guid><description>&lt;p>This unique course teaches you to harness the full power of Bash using strictly built-in commands and syntax.&lt;/p>
+&lt;h2 id="what-you-will-learn">What You Will Learn&lt;/h2>
+&lt;ul>
+&lt;li>Master core Bash syntax and built-in commands&lt;/li>
+&lt;li>Create portable scripts that work across all platforms&lt;/li>
+&lt;li>Handle data processing without external dependencies&lt;/li>
+&lt;li>Develop efficient text processing techniques&lt;/li>
+&lt;li>Build robust error handling and debugging skills&lt;/li>
+&lt;/ul>
+&lt;h2 id="course-contents">Course Contents&lt;/h2>
+&lt;ul>
+&lt;li>Module 1: Bash Fundamentals&lt;/li>
+&lt;li>Module 2: Variables and Data Types&lt;/li>
+&lt;li>Module 3: Control Structures and Logic&lt;/li>
+&lt;li>Module 4: Functions and Modularity&lt;/li>
+&lt;li>Module 5: Text Processing with Built-ins&lt;/li>
+&lt;li>Module 6: Error Handling and Debugging&lt;/li>
+&lt;li>Module 7: Cross-Platform Considerations&lt;/li>
+&lt;li>Module 8: Capstone Project&lt;/li>
+&lt;/ul>
+&lt;h2 id="why-this-course">Why This Course?&lt;/h2>
+&lt;p>In a world of tool dependencies and compatibility issues, this course focuses on the power of pure Bash. You&amp;rsquo;ll learn to write scripts that run unchanged across Linux, macOS, and Windows environments, providing you with skills that translate across all Unix-like systems.&lt;/p></description></item></channel></rss>
