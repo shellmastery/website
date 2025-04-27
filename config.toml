@@ -1,4 +1,4 @@
-baseURL = "https://shellschool.github.com/website/"
+baseURL = "https://shellschool.github.io/website/"
 canonifyURLs = true
 languageCode = "en-us"
 title = "Shell School - Master the Command Line"
