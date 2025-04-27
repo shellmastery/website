@@ -1,4 +1,5 @@
-baseURL = "https://shellschool.com/"
+baseURL = "https://shellschool.github.com/website/"
+canonifyURLs = true
 languageCode = "en-us"
 title = "Shell School - Master the Command Line"
 publishDir = "docs"
