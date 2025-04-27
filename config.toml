@@ -1,0 +1,23 @@
+baseURL = "https://shellschool.com/"
+languageCode = "en-us"
+title = "Shell School - Master the Command Line"
+publishDir = "docs"
+
+[params]
+  description = "Learn Bash scripting with courses for all levels - from universal Bash to specialized training for IT professionals and system administrators."
+  theme_css = "css/termhacker.css"
+  year = 2025
+  
+[menu]
+  [[menu.main]]
+    name = "Home"
+    url = "/"
+    weight = 1
+  [[menu.main]]
+    name = "Courses"
+    url = "/#courses"
+    weight = 2
+  [[menu.main]]
+    name = "About"
+    url = "/#about"
+    weight = 3

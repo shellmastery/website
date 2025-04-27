@@ -1,0 +1,22 @@
+{{ define "main" }}
+<div class="thank-you">
+  <div class="ascii-art">
+ _______  _                 _     __   __             _ 
+|_     _|| |_  ___  ___ _ _| |_  |  | |  | ___  _ _ _| |
+  |   |  |   || .'||   | | | |_  |  |_|  || . || | | . |
+  |___|  |_|_||__,||_|_|___|___|  \___/  ||___||___|___| 
+  </div>
+  
+  <h2>🎉 Payment Successful!</h2>
+  
+  <div class="terminal-window">
+    <span class="terminal-text">{{ .Content }}</span>
+  </div>
+  
+  <p>If you don't receive an email within 10 minutes, please check your spam folder or contact us at support@shellschool.com.</p>
+  
+  <p>Get ready to embark on your Bash scripting journey!</p>
+  
+  <a href="/" class="buy-button">Return to Home</a>
+</div>
+{{ end }}

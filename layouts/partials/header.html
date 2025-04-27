@@ -1,0 +1,11 @@
+<header>
+  <h1>SHELL SCHOOL</h1>
+  <p>$ {{ if .IsHome }}Master_the_command_line{{ else }}{{ replace .Title " " "_" }}{{ end }}</p>
+  <nav>
+    <ul>
+      {{ range .Site.Menus.main }}
+      <li><a href="{{ .URL }}">{{ .Name }}</a></li>
+      {{ end }}
+    </ul>
+  </nav>
+</header>
