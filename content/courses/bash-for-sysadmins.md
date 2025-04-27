@@ -8,8 +8,6 @@ logo: "bash_sysadmins.png"
 stripe_link: "https://buy.stripe.com/test_sysadmins"
 ---
 
-This course provides targeted Bash scripting training for SysAdmins, emphasizing automation of system monitoring, configuration management, and more.
-
 ## What You Will Learn
 
 - Build comprehensive system monitoring solutions

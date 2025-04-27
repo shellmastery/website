@@ -8,8 +8,6 @@ logo: "bash_universal.png"
 stripe_link: "https://buy.stripe.com/test_universal_bash"
 ---
 
-This unique course teaches you to harness the full power of Bash using strictly built-in commands and syntax.
-
 ## What You Will Learn
 
 - Master core Bash syntax and built-in commands

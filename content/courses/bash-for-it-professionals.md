@@ -8,8 +8,6 @@ logo: "bash_professionals.png"
 stripe_link: "https://buy.stripe.com/test_it_professionals"
 ---
 
-Designed explicitly for IT professionals, this course covers essential Bash skills for automating routine tasks.
-
 ## What You Will Learn
 
 - Automate routine IT tasks and workflows

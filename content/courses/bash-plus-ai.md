@@ -8,8 +8,6 @@ logo: "bash_ai.png"
 stripe_link: "https://buy.stripe.com/test_bash_ai"
 ---
 
-Explore the intersection of traditional Bash scripting with modern AI technology to build intelligent, self-optimizing scripts.
-
 ## What You Will Learn
 
 - Integrate AI-driven tools with Bash workflows

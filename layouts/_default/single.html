@@ -10,9 +10,11 @@
     </div>
   </div>
 
+  {{ if (isset .Params "description") }}
   <div class="terminal-window">
-    <span class="terminal-text">{{ .Summary }}</span>
+    <span class="terminal-text">{{ .Params.description }}</span>
   </div>
+  {{ end }}
 
   <div class="course-details">
     {{ .Content }}
