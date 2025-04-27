@@ -1,10 +1,15 @@
 body {
   background-color: #000;
   color: #00ff00;
-  font-family: "Courier New", Courier, monospace;
+  font-family: "Tomorrow", "Helvetica Neue", sans-serif;
   margin: 0;
   padding: 0;
   line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Tomorrow", "Helvetica Neue", sans-serif;
+  font-weight: 700;
 }
 
 a {
@@ -23,16 +28,51 @@ header, footer {
   text-align: center;
 }
 
-nav ul {
+header {
   display: flex;
-  list-style: none;
-  justify-content: center;
-  padding: 0;
-  margin: 0;
+  flex-direction: column;
+  align-items: center;
 }
 
-nav ul li {
-  margin: 0 1rem;
+.title-container {
+  width: 100%;
+  padding: 1.5rem 0;
+}
+
+.site-title {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+  font-size: 2.5rem;
+  margin: 0;
+  letter-spacing: 0.05em;
+  /* text-transform: uppercase; */
+}
+
+.terminal-nav {
+  width: 100%;
+  background-color: #000;
+  border-top: 1px solid #00ff00;
+  border-bottom: 1px solid #00ff00;
+  padding: 0.8rem 0;
+  margin-top: 0.5rem;
+  font-family: "Source Code Pro", monospace;
+}
+
+.terminal-prompt {
+  text-align: left;
+  margin: 0 0 0.3rem 1rem;
+  font-weight: bold;
+}
+
+.terminal-links {
+  text-align: left;
+  margin-left: 1rem;
+  display: flex;
+  gap: 1rem;
+}
+
+.terminal-links a {
+  text-decoration: none;
 }
 
 main {
@@ -52,6 +92,11 @@ main {
 .terminal-window::before {
   content: "$";
   margin-right: 0.5rem;
+  font-family: "Source Code Pro", monospace;
+}
+
+.terminal-window {
+  font-family: "Source Code Pro", monospace;
 }
 
 .blinking-cursor {
@@ -111,7 +156,7 @@ main {
 }
 
 .ascii-art {
-  font-family: monospace;
+  font-family: "Source Code Pro", monospace;
   white-space: pre;
   line-height: 1.2;
   margin: 2rem 0;
