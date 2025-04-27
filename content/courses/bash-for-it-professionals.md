@@ -4,7 +4,7 @@ date: 2025-03-22
 draft: false
 description: "Streamline your IT workflow by mastering Bash scripting tailored specifically for everyday IT tasks."
 price: 59
-logo: "bash_professionals.svg"
+logo: "bash_professionals.png"
 stripe_link: "https://buy.stripe.com/test_it_professionals"
 ---
 

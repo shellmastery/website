@@ -4,7 +4,7 @@ date: 2025-03-22
 draft: false
 description: "Enhance your system administration toolkit with powerful, practical Bash scripting techniques."
 price: 69
-logo: "bash_sysadmins.svg"
+logo: "bash_sysadmins.png"
 stripe_link: "https://buy.stripe.com/test_sysadmins"
 ---
 

@@ -4,7 +4,7 @@ date: 2025-03-22
 draft: false
 description: "Integrate Bash scripting with cutting-edge AI tools to automate workflows and enhance productivity."
 price: 79
-logo: "bash_ai.svg"
+logo: "bash_ai.png"
 stripe_link: "https://buy.stripe.com/test_bash_ai"
 ---
 
