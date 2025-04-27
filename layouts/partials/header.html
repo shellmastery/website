@@ -1,11 +1,13 @@
 <header>
-  <h1>SHELL SCHOOL</h1>
-  <p>$ {{ if .IsHome }}Master_the_command_line{{ else }}{{ replace .Title " " "_" }}{{ end }}</p>
-  <nav>
-    <ul>
+  <div class="title-container">
+    <h1 class="site-title">Shell School</h1>
+  </div>
+  <div class="terminal-nav">
+    <p class="terminal-prompt">$ ls</p>
+    <div class="terminal-links">
       {{ range .Site.Menus.main }}
-      <li><a href="{{ .URL }}">{{ .Name }}</a></li>
+      <a href="{{ .URL }}">{{ .Name | lower }}.html</a>
       {{ end }}
-    </ul>
-  </nav>
+    </div>
+  </div>
 </header>
