@@ -1,7 +1,7 @@
 baseURL = "https://shellmastery.github.io/website/"
 canonifyURLs = true
 languageCode = "en-us"
-title = "Shell School - Master the Command Line"
+title = "Shell Mastery - Command the Command Line"
 publishDir = "docs"
 
 [params]
