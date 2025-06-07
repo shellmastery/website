@@ -1,9 +1,13 @@
 <header>
   <div class="title-container">
-    <h1 class="site-title">Shell Mastery</h1>
+    <h1 class="site-title"><a href="{{ .Site.BaseURL }}">Shell Mastery</a></h1>
   </div>
   <div class="terminal-nav">
-    <p class="terminal-prompt">$ ls</p>
+    <div class="terminal-prompt">
+      <div class="desktop-prompt">$ ls</div>
+      <div class="mobile-prompt">$ pwd</div>
+      <div class="mobile-prompt">{{ if .IsHome }}~shellmastery/{{ else }}~/{{ .Title | lower | replaceRE " " "-" }}/{{ end }}</div>
+    </div>
     <button class="mobile-menu-toggle" aria-label="Toggle menu">
       <span></span>
       <span></span>
@@ -11,7 +15,7 @@
     </button>
     <div class="terminal-links">
       {{ range .Site.Menus.main }}
-      <a href="{{ .URL }}">{{ .Name | lower }}.html</a>
+      <a href="{{ .URL }}">~/{{ .Name | lower }}/</a>
       {{ end }}
     </div>
   </div>
