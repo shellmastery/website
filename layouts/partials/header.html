@@ -4,6 +4,11 @@
   </div>
   <div class="terminal-nav">
     <p class="terminal-prompt">$ ls</p>
+    <button class="mobile-menu-toggle" aria-label="Toggle menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
     <div class="terminal-links">
       {{ range .Site.Menus.main }}
       <a href="{{ .URL }}">{{ .Name | lower }}.html</a>
