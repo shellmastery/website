@@ -5,7 +5,7 @@ draft: false
 description: "Integrate Bash scripting with cutting-edge AI tools to automate workflows and enhance productivity."
 price: 79
 logo: "bash_ai.png"
-stripe_link: "https://buy.stripe.com/test_bash_ai"
+stripe_link: "https://buy.stripe.com/4gM14f2Qa0HO4XU6RG7wA01"
 ---
 
 ## What You Will Learn

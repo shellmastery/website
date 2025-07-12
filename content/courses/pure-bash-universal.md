@@ -5,7 +5,7 @@ draft: false
 description: "Master Bash scripting using only built-in commands for truly universal compatibility across Linux, macOS, and Windows (WSL & Git Bash)."
 price: 49
 logo: "bash_universal.png"
-stripe_link: "https://buy.stripe.com/test_universal_bash"
+stripe_link: "https://buy.stripe.com/4gM28jbmGduA61Ycc07wA00"
 ---
 
 ## What You Will Learn
