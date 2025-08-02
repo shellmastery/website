@@ -1,4 +1,4 @@
-baseURL = "https://shellmastery.github.io/website/"
+baseURL = "https://shellmastery.com/"
 canonifyURLs = true
 languageCode = "en-us"
 title = "Shell Mastery - Command the Command Line"
