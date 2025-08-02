@@ -5,6 +5,8 @@ body {
   margin: 0;
   padding: 0;
   line-height: 1.6;
+  font-size: 100%;
+  overflow-x: hidden;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -42,10 +44,25 @@ header {
 .site-title {
   font-family: "Montserrat", sans-serif;
   font-weight: 700;
-  font-size: 2.5rem;
+  font-size: 1.8rem;
   margin: 0;
   letter-spacing: 0.05em;
   /* text-transform: uppercase; */
+}
+
+.site-title a {
+  color: #00ff00;
+  text-decoration: none;
+}
+
+.site-title a:hover {
+  color: #ffffff;
+}
+
+@media (min-width: 768px) {
+  .site-title {
+    font-size: 2.5rem;
+  }
 }
 
 .terminal-nav {
@@ -61,14 +78,43 @@ header {
 .terminal-prompt {
   text-align: left;
   margin: 0 0 0.3rem 1rem;
-  font-weight: bold;
+  font-weight: normal;
+  line-height: 1.4;
+  color: #00ff00;
+}
+
+.mobile-prompt {
+  display: none;
+}
+
+.desktop-prompt {
+  display: block;
+}
+
+@media (max-width: 767px) {
+  .mobile-prompt {
+    display: block;
+  }
+  
+  .desktop-prompt {
+    display: none;
+  }
 }
 
 .terminal-links {
   text-align: left;
   margin-left: 1rem;
   display: flex;
-  gap: 1rem;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  font-size: 0.9rem;
+}
+
+@media (min-width: 768px) {
+  .terminal-links {
+    gap: 1rem;
+    font-size: 1rem;
+  }
 }
 
 .terminal-links a {
@@ -76,17 +122,30 @@ header {
 }
 
 main {
-  padding: 2rem;
+  padding: 1rem;
   max-width: 1200px;
   margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+  main {
+    padding: 2rem;
+  }
 }
 
 .terminal-window {
   border: 1px solid #00ff00;
   border-radius: 5px;
-  padding: 1rem;
-  margin: 2rem 0;
+  padding: 0.8rem;
+  margin: 1.5rem 0;
   position: relative;
+}
+
+@media (min-width: 768px) {
+  .terminal-window {
+    padding: 1rem;
+    margin: 2rem 0;
+  }
 }
 
 .terminal-window::before {
@@ -101,11 +160,12 @@ main {
 
 .blinking-cursor {
   display: inline-block;
-  width: 0.5rem;
-  height: 1rem;
+  width: 0.5em;
+  height: 1.2em;
   background: #00ff00;
-  margin-left: 0.2rem;
+  margin-left: 0.2em;
   animation: blink 1s step-end infinite;
+  vertical-align: text-bottom;
 }
 
 @keyframes blink {
@@ -115,9 +175,22 @@ main {
 
 .courses {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 2rem;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
   margin: 2rem 0;
+}
+
+@media (min-width: 576px) {
+  .courses {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  }
+}
+
+@media (min-width: 768px) {
+  .courses {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+  }
 }
 
 .course-card {
@@ -136,36 +209,68 @@ main {
   width: 100%;
   max-height: 150px;
   object-fit: contain;
-  margin-bottom: 1rem;
+  margin-bottom: 0;
 }
 
 .buy-button {
   display: inline-block;
   margin-top: 1rem;
-  padding: 0.7rem 1.5rem;
+  padding: 0.8rem 1.5rem;
   background-color: #00aa00;
   color: #000;
   text-decoration: none;
   font-weight: bold;
   border-radius: 5px;
   transition: background-color 0.3s;
+  line-height: 1.5;
+  text-align: center;
 }
 
 .buy-button:hover {
   background-color: #00ff00;
 }
 
+.ascii-wrapper {
+  text-align: center;
+  margin: 2rem 0;
+}
+
 .ascii-art {
   font-family: "Source Code Pro", monospace;
   white-space: pre;
   line-height: 1.2;
-  margin: 2rem 0;
-  font-size: 0.8rem;
+  margin: 0 0 1rem 0;
+  font-size: 0.5rem;
+  overflow-x: auto;
+  max-width: 100%;
+  display: inline-block;
+  text-align: left;
+}
+
+.ascii-cta {
+  font-family: "Source Code Pro", monospace;
+  font-size: 1.15rem;
+  color: #00ff00;
+  margin-top: 1rem;
+}
+
+@media (min-width: 480px) {
+  .ascii-art {
+    font-size: 0.7rem;
+  }
+  
+  .ascii-cta {
+    font-size: 1.15rem;
+  }
 }
 
 @media (min-width: 768px) {
   .ascii-art {
     font-size: 1rem;
+  }
+  
+  .ascii-cta {
+    font-size: 1.15rem;
   }
 }
 
@@ -176,13 +281,29 @@ footer {
 
 .course-page .course-header {
   display: flex;
+  flex-direction: column;
   align-items: center;
   margin-bottom: 2rem;
+  text-align: center;
 }
 
 .course-page .course-logo {
-  width: 200px;
-  margin-right: 2rem;
+  width: 150px;
+  margin-bottom: 0;
+}
+
+@media (min-width: 768px) {
+  .course-page .course-header {
+    flex-direction: row;
+    align-items: flex-start;
+    text-align: left;
+  }
+  
+  .course-page .course-logo {
+    width: 200px;
+    margin-right: 2rem;
+    margin-bottom: 0;
+  }
 }
 
 .course-details {
@@ -201,6 +322,93 @@ footer {
 }
 
 .thank-you h2 {
-  font-size: 2.5rem;
+  font-size: 1.8rem;
   margin-bottom: 2rem;
+}
+
+@media (min-width: 768px) {
+  .thank-you h2 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Typography */
+@media (max-width: 480px) {
+  body {
+    font-size: 0.875rem;
+  }
+  
+  h1 {
+    font-size: 1.5rem;
+  }
+  
+  h2 {
+    font-size: 1.3rem;
+  }
+  
+  h3 {
+    font-size: 1.1rem;
+  }
+  
+  .course-card {
+    padding: 1rem;
+  }
+}
+
+/* Mobile Navigation */
+.mobile-menu-toggle {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .terminal-nav {
+    position: relative;
+  }
+  
+  .mobile-menu-toggle {
+    display: block;
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    z-index: 100;
+  }
+  
+  .mobile-menu-toggle span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background: #00ff00;
+    margin: 5px 0;
+    transition: 0.3s;
+  }
+  
+  .terminal-links {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: #000;
+    flex-direction: column;
+    padding: 1rem;
+    gap: 0.8rem;
+    border-bottom: 1px solid #00ff00;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.8);
+    z-index: 50;
+    margin-left: 0;
+  }
+  
+  .terminal-links.active {
+    display: flex;
+  }
+  
+  .terminal-links a {
+    display: block;
+    padding: 0.5rem 0;
+  }
 }
