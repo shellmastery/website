@@ -390,28 +390,8 @@ footer {
   color: #000;
 }
 
-.week-option.full {
-  opacity: 0.5;
-  cursor: not-allowed;
-  border-style: dashed;
-}
-
 .week-date {
   font-weight: bold;
-  margin-bottom: 0.5rem;
-}
-
-.week-spots {
-  font-size: 0.85rem;
-  color: #00aa00;
-}
-
-.week-option.selected .week-spots {
-  color: #004400;
-}
-
-.week-option.full .week-spots {
-  color: #ff4444;
 }
 
 /* Enrollment Form */
