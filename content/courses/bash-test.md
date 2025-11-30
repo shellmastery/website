@@ -7,6 +7,9 @@ price: 0
 logo: "bash_ai.png"
 product_id: "course_bash_test"
 stripe_link: ""
+_build:
+  list: never
+  render: always
 ---
 
 ## Test Course
