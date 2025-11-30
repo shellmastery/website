@@ -5,6 +5,7 @@ draft: false
 description: "Enhance your system administration toolkit with powerful, practical Bash scripting techniques."
 price: 69
 logo: "bash_sysadmins.png"
+product_id: "course_bash_sysadmin"
 stripe_link: "https://buy.stripe.com/eVqdR1duO4Y4fCyfoc7wA02"
 ---
 
