@@ -6,8 +6,15 @@
     <description>Recent content on Shell Mastery - Command the Command Line</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 22 Mar 2025 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 29 Nov 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://shellmastery.com/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Bash Test</title>
+      <link>https://shellmastery.com/courses/bash-test/</link>
+      <pubDate>Sat, 29 Nov 2025 00:00:00 +0000</pubDate>
+      <guid>https://shellmastery.com/courses/bash-test/</guid>
+      <description>Test Course This is a test course for validating the ShellMastery checkout and enrollment system.&#xA;This course is not for sale and is only used for internal testing purposes.&#xA;Features Being Tested Week selector functionality Stripe checkout session creation Payment processing with $0 amount Enrollment confirmation emails Access code generation Meeting scheduling integration How to Use Select an available week from the calendar Enter test information (name and email) Complete the checkout process Verify enrollment confirmation email Test access code on the join page Important Notes This course has a $0 price point Enrollments are for testing only Meeting links may not be valid Data may be cleared periodically For production courses, please visit the main courses page.</description>
+    </item>
     <item>
       <title>Bash &#43; AI</title>
       <link>https://shellmastery.com/courses/bash-plus-ai/</link>

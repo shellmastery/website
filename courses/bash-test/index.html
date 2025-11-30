@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bash Test - Shell Mastery - Command the Command Line</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Source+Code+Pro:wght@400;700&family=Tomorrow:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://shellmastery.com/css/termhacker.css">
+  <meta name="description" content="Test course for validating the checkout flow. Not for production use.">
+  <script type="text/javascript">
+      (function(c,l,a,r,i,t,y){
+          c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+          t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+          y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+      })(window, document, "clarity", "script", "svwbjqg8q2");
+  </script>
+</head>
+<body>
+  <header>
+  <div class="title-container">
+    <h1 class="site-title"><a href="https://shellmastery.com/">Shell Mastery</a></h1>
+  </div>
+  <div class="terminal-nav">
+    <div class="terminal-prompt">
+      <div class="desktop-prompt">$ ls</div>
+      <div class="mobile-prompt">$ pwd</div>
+      <div class="mobile-prompt">~/bash-test/</div>
+    </div>
+    <button class="mobile-menu-toggle" aria-label="Toggle menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <div class="terminal-links">
+      
+      <a href="https://shellmastery.com/">~/home/</a>
+      
+      <a href="https://shellmastery.com/#courses">~/courses/</a>
+      
+      <a href="https://shellmastery.com/#about">~/about/</a>
+      
+    </div>
+  </div>
+</header>
+
+  <main>
+    
+<article class="course-page" data-product-id="course_bash_test">
+  <div class="course-header">
+    <img src="https://shellmastery.com/img/logos/bash_ai.png" alt="Bash Test" class="course-logo">
+    <div>
+      <h2>Bash Test</h2>
+      <p>Test course for validating the checkout flow. Not for production use.</p>
+      <p><strong>Price: $0</strong></p>
+    </div>
+  </div>
+
+  
+  <div class="terminal-window">
+    <span class="terminal-text">Test course for validating the checkout flow. Not for production use.</span>
+  </div>
+  
+
+  <div class="course-details">
+    <h2 id="test-course">Test Course</h2>
+<p>This is a test course for validating the ShellMastery checkout and enrollment system.</p>
+<p><strong>This course is not for sale and is only used for internal testing purposes.</strong></p>
+<h3 id="features-being-tested">Features Being Tested</h3>
+<ul>
+<li>Week selector functionality</li>
+<li>Stripe checkout session creation</li>
+<li>Payment processing with $0 amount</li>
+<li>Enrollment confirmation emails</li>
+<li>Access code generation</li>
+<li>Meeting scheduling integration</li>
+</ul>
+<h3 id="how-to-use">How to Use</h3>
+<ol>
+<li>Select an available week from the calendar</li>
+<li>Enter test information (name and email)</li>
+<li>Complete the checkout process</li>
+<li>Verify enrollment confirmation email</li>
+<li>Test access code on the join page</li>
+</ol>
+<h2 id="important-notes">Important Notes</h2>
+<ul>
+<li>This course has a $0 price point</li>
+<li>Enrollments are for testing only</li>
+<li>Meeting links may not be valid</li>
+<li>Data may be cleared periodically</li>
+</ul>
+<p>For production courses, please visit the <a href="https://shellmastery.com/">main courses page</a>.</p>
+
+  </div>
+
+  
+  <div class="enrollment-section">
+    <h3>Select Your Start Week</h3>
+    <div class="week-selector-container">
+      <div class="week-selector loading">
+        <div class="loading-text">Loading available weeks...</div>
+      </div>
+    </div>
+
+    <div class="enrollment-form" style="display: none;">
+      <div class="form-group">
+        <label for="student-name">Your Name</label>
+        <input type="text" id="student-name" placeholder="Jack Bauer" required>
+      </div>
+      <div class="form-group">
+        <label for="student-email">Your Email</label>
+        <input type="email" id="student-email" placeholder="jack@example.com" required>
+      </div>
+      <button class="buy-button enroll-button" disabled>Select a Week to Continue</button>
+    </div>
+
+    <div class="enrollment-error" style="display: none;"></div>
+  </div>
+</article>
+
+<script>
+(function() {
+  const API_BASE = 'https://api.shitchell.com/v1';
+  const productId = document.querySelector('.course-page').dataset.productId;
+
+  if (!productId) {
+    console.error('No product_id found for this course');
+    return;
+  }
+
+  const weekSelector = document.querySelector('.week-selector');
+  const enrollmentForm = document.querySelector('.enrollment-form');
+  const enrollButton = document.querySelector('.enroll-button');
+  const errorDiv = document.querySelector('.enrollment-error');
+
+  let selectedWeek = null;
+  let reservationToken = null;
+
+  
+  async function loadAvailableWeeks() {
+    try {
+      const response = await fetch(`${API_BASE}/courses/${productId}/available-weeks?num_weeks=8`);
+      if (!response.ok) throw new Error('Failed to load weeks');
+
+      const weeks = await response.json();
+      renderWeeks(weeks);
+      enrollmentForm.style.display = 'block';
+    } catch (err) {
+      weekSelector.innerHTML = '<div class="error-text">Failed to load available weeks. Please refresh.</div>';
+      console.error(err);
+    }
+  }
+
+  function renderWeeks(weeks) {
+    weekSelector.classList.remove('loading');
+
+    const availableWeeks = weeks.filter(w => w.is_available);
+
+    if (availableWeeks.length === 0) {
+      weekSelector.innerHTML = '<div class="no-weeks">No available weeks at this time. Please check back later.</div>';
+      return;
+    }
+
+    
+    const openWeeks = availableWeeks.filter(w => !w.is_full);
+
+    if (openWeeks.length === 0) {
+      weekSelector.innerHTML = '<div class="no-weeks">No available weeks at this time. Please check back later.</div>';
+      return;
+    }
+
+    weekSelector.innerHTML = openWeeks.map(week => `
+      <div class="week-option"
+           data-year="${week.year}"
+           data-week="${week.week_number}">
+        <div class="week-date">${week.week_display}</div>
+      </div>
+    `).join('');
+
+    
+    weekSelector.querySelectorAll('.week-option:not([data-disabled])').forEach(option => {
+      option.addEventListener('click', () => selectWeek(option));
+    });
+  }
+
+  function selectWeek(option) {
+    
+    weekSelector.querySelectorAll('.week-option').forEach(o => o.classList.remove('selected'));
+
+    
+    option.classList.add('selected');
+    selectedWeek = {
+      year: parseInt(option.dataset.year),
+      week_number: parseInt(option.dataset.week)
+    };
+
+    enrollButton.disabled = false;
+    enrollButton.textContent = 'Proceed to Checkout →';
+  }
+
+  
+  enrollButton.addEventListener('click', async () => {
+    const name = document.getElementById('student-name').value.trim();
+    const email = document.getElementById('student-email').value.trim();
+
+    if (!name || !email) {
+      showError('Please enter your name and email.');
+      return;
+    }
+
+    if (!selectedWeek) {
+      showError('Please select a week.');
+      return;
+    }
+
+    enrollButton.disabled = true;
+    enrollButton.textContent = 'Creating checkout...';
+    errorDiv.style.display = 'none';
+
+    try {
+      
+      const reserveResponse = await fetch(`${API_BASE}/checkout/reserve`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          product_id: productId,
+          year: selectedWeek.year,
+          week_number: selectedWeek.week_number,
+          email: email
+        })
+      });
+
+      if (!reserveResponse.ok) {
+        const err = await reserveResponse.json();
+        throw new Error(err.detail || 'Failed to reserve spot');
+      }
+
+      const reservation = await reserveResponse.json();
+      reservationToken = reservation.reservation_token;
+
+      
+      const sessionResponse = await fetch(`${API_BASE}/checkout/create-session`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          product_id: productId,
+          year: selectedWeek.year,
+          week_number: selectedWeek.week_number,
+          email: email,
+          name: name,
+          reservation_token: reservationToken
+        })
+      });
+
+      if (!sessionResponse.ok) {
+        const err = await sessionResponse.json();
+        throw new Error(err.detail || 'Failed to create checkout');
+      }
+
+      const session = await sessionResponse.json();
+
+      
+      window.location.href = session.checkout_url;
+
+    } catch (err) {
+      showError(err.message);
+      enrollButton.disabled = false;
+      enrollButton.textContent = 'Proceed to Checkout →';
+    }
+  });
+
+  function showError(message) {
+    errorDiv.textContent = message;
+    errorDiv.style.display = 'block';
+  }
+
+  
+  loadAvailableWeeks();
+})();
+</script>
+
+  </main>
+
+  <footer>
+  <p>&copy; 2025 Shell Mastery. All rights reserved.</p>
+  <p>$ echo "Happy scripting!"</p>
+</footer>
+
+  <script src="https://shellmastery.com/js/main.js"></script>
+</body>
+</html>
