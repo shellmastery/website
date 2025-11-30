@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin - Shell Mastery - Command the Command Line</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Source+Code+Pro:wght@400;700&family=Tomorrow:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://shellmastery.com/css/termhacker.css">
+  <meta name="description" content="Learn Bash scripting with courses for all levels - from universal Bash to specialized training for IT professionals and system administrators.">
+  <script type="text/javascript">
+      (function(c,l,a,r,i,t,y){
+          c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+          t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+          y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+      })(window, document, "clarity", "script", "svwbjqg8q2");
+  </script>
+</head>
+<body>
+  <header>
+  <div class="title-container">
+    <h1 class="site-title"><a href="https://shellmastery.com/">Shell Mastery</a></h1>
+  </div>
+  <div class="terminal-nav">
+    <div class="terminal-prompt">
+      <div class="desktop-prompt">$ ls</div>
+      <div class="mobile-prompt">$ pwd</div>
+      <div class="mobile-prompt">~/admin/</div>
+    </div>
+    <button class="mobile-menu-toggle" aria-label="Toggle menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <div class="terminal-links">
+      
+      <a href="https://shellmastery.com/">~/home/</a>
+      
+      <a href="https://shellmastery.com/#courses">~/courses/</a>
+      
+      <a href="https://shellmastery.com/#about">~/about/</a>
+      
+    </div>
+  </div>
+</header>
+
+  <main>
+    
+<div class="admin-page">
+  
+  <div id="login-section" style="max-width: 400px; margin: 4rem auto; text-align: center;">
+    <div class="terminal-window" style="padding: 2rem;">
+      <input
+        type="password"
+        id="api-key-input"
+        placeholder="_"
+        autocomplete="off"
+        style="background: transparent; border: none; border-bottom: 2px solid #00ff00; color: #00ff00; font-family: 'Source Code Pro', monospace; font-size: 1.2rem; width: 100%; text-align: center; outline: none; padding: 0.5rem 0;"
+      >
+      <div id="login-error" style="display: none; margin-top: 1rem; color: #ff0000; font-family: 'Source Code Pro', monospace; font-size: 0.9rem;">
+        access denied
+      </div>
+    </div>
+  </div>
+
+  
+  <div id="dashboard-section" style="display: none;">
+    
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid #00ff00;">
+      <h2 style="margin: 0; font-family: 'Source Code Pro', monospace;">$ admin_dashboard</h2>
+      <button id="logout-button" class="buy-button" style="padding: 0.5rem 1rem; font-size: 0.9rem; background-color: #333; cursor: pointer;">
+        logout
+      </button>
+    </div>
+
+    
+    <div class="terminal-window" style="margin-bottom: 2rem;">
+      <h3 style="margin-top: 0; color: #00ffff; font-family: 'Source Code Pro', monospace;">Stats</h3>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem;">
+        <div class="stat-card">
+          <div class="stat-label">Total Enrollments</div>
+          <div class="stat-value" id="stat-enrollments">--</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Total Revenue</div>
+          <div class="stat-value" id="stat-revenue">$--</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Upcoming Meetings</div>
+          <div class="stat-value" id="stat-meetings">--</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Active Courses</div>
+          <div class="stat-value" id="stat-courses">--</div>
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="terminal-window" style="margin-bottom: 2rem;">
+      <h3 style="margin-top: 0; color: #00ffff; font-family: 'Source Code Pro', monospace;">Upcoming Meetings (Next 30 Days)</h3>
+      <div id="meetings-container" style="overflow-x: auto;">
+        <div class="loading-text">Loading...</div>
+      </div>
+    </div>
+
+    
+    <div class="terminal-window">
+      <h3 style="margin-top: 0; color: #00ffff; font-family: 'Source Code Pro', monospace;">Recent Enrollments</h3>
+      <div id="enrollments-container" style="overflow-x: auto;">
+        <div class="loading-text">Loading...</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+.admin-page {
+  font-family: 'Source Code Pro', monospace;
+}
+
+.stat-card {
+  padding: 1rem;
+  border: 1px solid #003300;
+  border-radius: 5px;
+  background-color: rgba(0, 50, 0, 0.2);
+}
+
+.stat-label {
+  font-size: 0.85rem;
+  color: #00aa00;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+}
+
+.stat-value {
+  font-size: 1.8rem;
+  color: #00ff00;
+  font-weight: bold;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'Source Code Pro', monospace;
+  font-size: 0.9rem;
+  min-width: 600px;
+}
+
+.data-table th {
+  text-align: left;
+  padding: 0.8rem;
+  border-bottom: 2px solid #00ff00;
+  color: #00ffff;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+}
+
+.data-table td {
+  padding: 0.8rem;
+  border-bottom: 1px solid #003300;
+  color: #00ff00;
+}
+
+.data-table tr:hover {
+  background-color: rgba(0, 255, 0, 0.05);
+}
+
+.capacity-indicator {
+  display: inline-block;
+  padding: 0.2rem 0.5rem;
+  border-radius: 3px;
+  font-size: 0.85rem;
+  font-weight: bold;
+}
+
+.capacity-low {
+  background-color: rgba(0, 255, 0, 0.2);
+  color: #00ff00;
+}
+
+.capacity-medium {
+  background-color: rgba(255, 255, 0, 0.2);
+  color: #ffff00;
+}
+
+.capacity-high {
+  background-color: rgba(255, 165, 0, 0.2);
+  color: #ffaa00;
+}
+
+.capacity-full {
+  background-color: rgba(255, 0, 0, 0.2);
+  color: #ff0000;
+}
+
+.resend-button {
+  padding: 0.3rem 0.6rem;
+  background-color: #003366;
+  color: #00aaff;
+  border: 1px solid #00aaff;
+  border-radius: 3px;
+  font-family: 'Source Code Pro', monospace;
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.resend-button:hover {
+  background-color: #00aaff;
+  color: #000;
+}
+
+.resend-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.access-code-display {
+  font-family: 'Source Code Pro', monospace;
+  color: #00ffff;
+  background-color: rgba(0, 100, 100, 0.2);
+  padding: 0.2rem 0.4rem;
+  border-radius: 3px;
+  letter-spacing: 0.05em;
+}
+
+.error-message {
+  padding: 1rem;
+  background-color: rgba(255, 0, 0, 0.1);
+  border: 1px solid #ff0000;
+  border-radius: 5px;
+  color: #ff0000;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 2rem;
+  color: #666;
+}
+</style>
+
+<script>
+(function() {
+  const API_BASE = 'https://api.shitchell.com/v1';
+
+  
+  const loginSection = document.getElementById('login-section');
+  const dashboardSection = document.getElementById('dashboard-section');
+  const apiKeyInput = document.getElementById('api-key-input');
+  const loginError = document.getElementById('login-error');
+  const logoutButton = document.getElementById('logout-button');
+
+  let apiKey = null;
+
+  
+  function init() {
+    const storedKey = sessionStorage.getItem('admin_api_key');
+    if (storedKey) {
+      apiKey = storedKey;
+      validateAndLoadDashboard();
+    } else {
+      showLogin();
+    }
+  }
+
+  
+  function showLogin() {
+    loginSection.style.display = 'block';
+    dashboardSection.style.display = 'none';
+    apiKeyInput.value = '';
+    apiKeyInput.focus();
+  }
+
+  
+  function showDashboard() {
+    loginSection.style.display = 'none';
+    dashboardSection.style.display = 'block';
+    loadDashboardData();
+  }
+
+  
+  async function validateAndLoadDashboard() {
+    try {
+      const response = await fetch(`${API_BASE}/admin/stats`, {
+        headers: { 'X-API-Key': apiKey }
+      });
+
+      if (response.ok) {
+        sessionStorage.setItem('admin_api_key', apiKey);
+        showDashboard();
+      } else {
+        
+        sessionStorage.removeItem('admin_api_key');
+        showLogin();
+        loginError.style.display = 'block';
+        setTimeout(() => {
+          loginError.style.display = 'none';
+        }, 2000);
+      }
+    } catch (err) {
+      console.error('Validation error:', err);
+      showLogin();
+      loginError.textContent = 'connection error';
+      loginError.style.display = 'block';
+      setTimeout(() => {
+        loginError.style.display = 'none';
+        loginError.textContent = 'access denied';
+      }, 2000);
+    }
+  }
+
+  
+  async function loadDashboardData() {
+    await Promise.all([
+      loadStats(),
+      loadUpcomingMeetings(),
+      loadRecentEnrollments()
+    ]);
+  }
+
+  
+  async function loadStats() {
+    try {
+      const response = await fetch(`${API_BASE}/admin/stats`, {
+        headers: { 'X-API-Key': apiKey }
+      });
+
+      if (!response.ok) throw new Error('Failed to load stats');
+
+      const data = await response.json();
+      document.getElementById('stat-enrollments').textContent = data.total_enrollments || 0;
+      document.getElementById('stat-revenue').textContent = '$' + (data.total_revenue || 0).toFixed(2);
+      document.getElementById('stat-meetings').textContent = data.upcoming_meetings || 0;
+      document.getElementById('stat-courses').textContent = data.active_courses || 0;
+    } catch (err) {
+      console.error('Error loading stats:', err);
+    }
+  }
+
+  
+  async function loadUpcomingMeetings() {
+    const container = document.getElementById('meetings-container');
+
+    try {
+      const response = await fetch(`${API_BASE}/admin/meetings/upcoming`, {
+        headers: { 'X-API-Key': apiKey }
+      });
+
+      if (!response.ok) throw new Error('Failed to load meetings');
+
+      const meetings = await response.json();
+
+      if (meetings.length === 0) {
+        container.innerHTML = '<div class="empty-state">No upcoming meetings</div>';
+        return;
+      }
+
+      const table = document.createElement('table');
+      table.className = 'data-table';
+
+      table.innerHTML = `
+        <thead>
+          <tr>
+            <th>Course</th>
+            <th>Start Date/Time</th>
+            <th>Enrollment</th>
+            <th>Capacity</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${meetings.map(meeting => {
+            const percentage = (meeting.current_enrollment / meeting.max_enrollment) * 100;
+            let capacityClass = 'capacity-low';
+            if (percentage >= 100) capacityClass = 'capacity-full';
+            else if (percentage >= 75) capacityClass = 'capacity-high';
+            else if (percentage >= 50) capacityClass = 'capacity-medium';
+
+            return `
+              <tr>
+                <td>${escapeHtml(meeting.course_name)}</td>
+                <td>${formatDateTime(meeting.start_datetime)}</td>
+                <td>${meeting.current_enrollment}</td>
+                <td>
+                  <span class="capacity-indicator ${capacityClass}">
+                    ${meeting.current_enrollment}/${meeting.max_enrollment}
+                  </span>
+                </td>
+              </tr>
+            `;
+          }).join('')}
+        </tbody>
+      `;
+
+      container.innerHTML = '';
+      container.appendChild(table);
+    } catch (err) {
+      console.error('Error loading meetings:', err);
+      container.innerHTML = '<div class="error-message">Failed to load meetings</div>';
+    }
+  }
+
+  
+  async function loadRecentEnrollments() {
+    const container = document.getElementById('enrollments-container');
+
+    try {
+      const response = await fetch(`${API_BASE}/admin/enrollments`, {
+        headers: { 'X-API-Key': apiKey }
+      });
+
+      if (!response.ok) throw new Error('Failed to load enrollments');
+
+      const enrollments = await response.json();
+
+      if (enrollments.length === 0) {
+        container.innerHTML = '<div class="empty-state">No enrollments yet</div>';
+        return;
+      }
+
+      const table = document.createElement('table');
+      table.className = 'data-table';
+
+      table.innerHTML = `
+        <thead>
+          <tr>
+            <th>Student</th>
+            <th>Email</th>
+            <th>Course</th>
+            <th>Access Code</th>
+            <th>Enrolled</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${enrollments.map(enrollment => `
+            <tr>
+              <td>${escapeHtml(enrollment.student_name)}</td>
+              <td>${escapeHtml(enrollment.student_email)}</td>
+              <td>${escapeHtml(enrollment.course_name || 'N/A')}</td>
+              <td>
+                <span class="access-code-display">${escapeHtml(enrollment.access_code)}</span>
+              </td>
+              <td>${formatDate(enrollment.created_at)}</td>
+              <td>
+                <button
+                  class="resend-button"
+                  data-enrollment-id="${enrollment.id}"
+                  onclick="resendWelcomeEmail(${enrollment.id}, this)"
+                >
+                  resend email
+                </button>
+              </td>
+            </tr>
+          `).join('')}
+        </tbody>
+      `;
+
+      container.innerHTML = '';
+      container.appendChild(table);
+    } catch (err) {
+      console.error('Error loading enrollments:', err);
+      container.innerHTML = '<div class="error-message">Failed to load enrollments</div>';
+    }
+  }
+
+  
+  window.resendWelcomeEmail = async function(enrollmentId, button) {
+    button.disabled = true;
+    const originalText = button.textContent;
+    button.textContent = 'sending...';
+
+    try {
+      const response = await fetch(`${API_BASE}/admin/enrollments/${enrollmentId}/resend-welcome`, {
+        method: 'POST',
+        headers: { 'X-API-Key': apiKey }
+      });
+
+      if (!response.ok) throw new Error('Failed to resend email');
+
+      const data = await response.json();
+      button.textContent = 'sent!';
+      setTimeout(() => {
+        button.textContent = originalText;
+        button.disabled = false;
+      }, 2000);
+    } catch (err) {
+      console.error('Error resending email:', err);
+      button.textContent = 'error';
+      setTimeout(() => {
+        button.textContent = originalText;
+        button.disabled = false;
+      }, 2000);
+    }
+  };
+
+  
+  function formatDateTime(isoString) {
+    const date = new Date(isoString);
+    return date.toLocaleString('en-US', {
+      month: 'short',
+      day: 'numeric',
+      year: 'numeric',
+      hour: 'numeric',
+      minute: '2-digit',
+      timeZoneName: 'short'
+    });
+  }
+
+  
+  function formatDate(isoString) {
+    const date = new Date(isoString);
+    return date.toLocaleString('en-US', {
+      month: 'short',
+      day: 'numeric',
+      year: 'numeric'
+    });
+  }
+
+  
+  function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+  }
+
+  
+  apiKeyInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+      apiKey = apiKeyInput.value.trim();
+      if (apiKey) {
+        validateAndLoadDashboard();
+      }
+    }
+  });
+
+  
+  logoutButton.addEventListener('click', () => {
+    sessionStorage.removeItem('admin_api_key');
+    apiKey = null;
+    showLogin();
+  });
+
+  
+  init();
+})();
+</script>
+
+  </main>
+
+  <footer>
+  <p>&copy; 2025 Shell Mastery. All rights reserved.</p>
+  <p>$ echo "Happy scripting!"</p>
+</footer>
+
+  <script src="https://shellmastery.com/js/main.js"></script>
+  <script src="https://shellmastery.com/js/analytics.js"></script>
+</body>
+</html>
