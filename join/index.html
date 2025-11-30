@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Join Your Class - Shell Mastery - Command the Command Line</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Source+Code+Pro:wght@400;700&family=Tomorrow:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://shellmastery.com/css/termhacker.css">
+  <meta name="description" content="Learn Bash scripting with courses for all levels - from universal Bash to specialized training for IT professionals and system administrators.">
+  <script type="text/javascript">
+      (function(c,l,a,r,i,t,y){
+          c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+          t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+          y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+      })(window, document, "clarity", "script", "svwbjqg8q2");
+  </script>
+</head>
+<body>
+  <header>
+  <div class="title-container">
+    <h1 class="site-title"><a href="https://shellmastery.com/">Shell Mastery</a></h1>
+  </div>
+  <div class="terminal-nav">
+    <div class="terminal-prompt">
+      <div class="desktop-prompt">$ ls</div>
+      <div class="mobile-prompt">$ pwd</div>
+      <div class="mobile-prompt">~/join-your-class/</div>
+    </div>
+    <button class="mobile-menu-toggle" aria-label="Toggle menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <div class="terminal-links">
+      
+      <a href="https://shellmastery.com/">~/home/</a>
+      
+      <a href="https://shellmastery.com/#courses">~/courses/</a>
+      
+      <a href="https://shellmastery.com/#about">~/about/</a>
+      
+    </div>
+  </div>
+</header>
+
+  <main>
+    
+<div class="join-page">
+  <h2>Join Your ShellMastery Class</h2>
+
+  
+  <div id="code-input-section" class="enrollment-form" style="max-width: 500px; margin: 2rem auto;">
+    <div class="form-group">
+      <label for="access-code">Enter Your Access Code</label>
+      <input
+        type="text"
+        id="access-code"
+        placeholder="ABC-DEF-GH12"
+        maxlength="12"
+        style="text-transform: uppercase;"
+        autocomplete="off"
+      >
+    </div>
+    <button class="buy-button" id="validate-button" style="width: 100%;">Validate Code</button>
+    <div class="enrollment-error" id="error-message" style="display: none;"></div>
+  </div>
+
+  
+  <div id="loading-section" class="terminal-window" style="display: none; text-align: center; max-width: 500px; margin: 2rem auto;">
+    <span class="loading-text">Validating your access code...</span>
+  </div>
+
+  
+  <div id="too-early-section" style="display: none; max-width: 600px; margin: 2rem auto;">
+    <div class="terminal-window enrollment-card">
+      <h3>Welcome, <span id="student-name-early"></span>!</h3>
+      <p style="margin-bottom: 1.5rem;">You're registered for:</p>
+
+      <div class="detail-row">
+        <span class="detail-label">Course:</span>
+        <span id="course-name-early" class="detail-value">-</span>
+      </div>
+
+      <div class="detail-row">
+        <span class="detail-label">Class Starts:</span>
+        <span id="start-time-early" class="detail-value">-</span>
+      </div>
+
+      <div style="margin-top: 2rem; padding: 1.5rem; background-color: rgba(0, 255, 255, 0.1); border: 1px solid #00ffff; border-radius: 5px; text-align: center;">
+        <p style="margin-bottom: 1rem; font-size: 1.1rem;">You can join in:</p>
+        <div id="countdown-timer" style="font-family: 'Source Code Pro', monospace; font-size: 2rem; color: #00ffff; font-weight: bold;">
+          --:--
+        </div>
+        <p style="margin-top: 1rem; font-size: 0.9rem; color: #00aa00;">
+          (Access opens 20 minutes before class starts)
+        </p>
+      </div>
+
+      <p style="margin-top: 1.5rem; text-align: center; color: #00aa00;">
+        This page will automatically refresh when you can join.
+      </p>
+    </div>
+  </div>
+
+  
+  <div id="can-join-section" style="display: none; max-width: 600px; margin: 2rem auto;">
+    <div class="terminal-window enrollment-card">
+      <h3>Welcome, <span id="student-name-ready"></span>!</h3>
+      <p style="margin-bottom: 1.5rem;">You're ready to join:</p>
+
+      <div class="detail-row">
+        <span class="detail-label">Course:</span>
+        <span id="course-name-ready" class="detail-value">-</span>
+      </div>
+
+      <div style="margin-top: 2rem; text-align: center;">
+        <a id="join-button" href="#" class="buy-button" style="font-size: 1.3rem; padding: 1.2rem 2rem; display: inline-block; background-color: #00ffff; color: #000;">
+          Join Meeting Now
+        </a>
+      </div>
+
+      <p style="margin-top: 2rem; text-align: center; color: #00aa00; font-size: 0.9rem;">
+        Click the button above to join your Google Meet class.
+      </p>
+    </div>
+  </div>
+
+  
+  <div id="ended-section" style="display: none; max-width: 600px; margin: 2rem auto;">
+    <div class="terminal-window enrollment-card">
+      <h3>Class Has Ended</h3>
+      <p style="margin-bottom: 1.5rem;">Thank you for attending!</p>
+
+      <div class="detail-row">
+        <span class="detail-label">Course:</span>
+        <span id="course-name-ended" class="detail-value">-</span>
+      </div>
+
+      <div class="detail-row">
+        <span class="detail-label">Class Time:</span>
+        <span id="time-ended" class="detail-value">-</span>
+      </div>
+
+      <p style="margin-top: 2rem; color: #00aa00;">
+        This class has ended. If you have questions or need assistance, please contact us at
+        <a href="mailto:support@shellmastery.com">support@shellmastery.com</a>.
+      </p>
+    </div>
+  </div>
+
+  
+  <div id="invalid-section" style="display: none; max-width: 600px; margin: 2rem auto;">
+    <div class="terminal-window" style="background-color: rgba(255, 0, 0, 0.1); border-color: #ff0000;">
+      <h3 style="color: #ff0000;">Invalid Access Code</h3>
+      <p>The access code you entered is not valid. Please check your email for the correct code.</p>
+      <p style="margin-top: 1rem;">If you continue to have issues, please contact us at
+        <a href="mailto:support@shellmastery.com">support@shellmastery.com</a>.
+      </p>
+      <button class="buy-button" onclick="location.reload()" style="margin-top: 1.5rem;">Try Again</button>
+    </div>
+  </div>
+</div>
+
+<style>
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #003300;
+}
+
+.detail-label {
+  font-family: "Source Code Pro", monospace;
+  color: #00aa00;
+  font-weight: bold;
+}
+
+.detail-value {
+  font-family: "Source Code Pro", monospace;
+  color: #00ff00;
+  text-align: right;
+}
+</style>
+
+<script>
+(function() {
+  const API_BASE = 'https://api.shitchell.com/v1';
+
+  
+  const codeInputSection = document.getElementById('code-input-section');
+  const loadingSection = document.getElementById('loading-section');
+  const tooEarlySection = document.getElementById('too-early-section');
+  const canJoinSection = document.getElementById('can-join-section');
+  const endedSection = document.getElementById('ended-section');
+  const invalidSection = document.getElementById('invalid-section');
+  const errorMessage = document.getElementById('error-message');
+
+  const accessCodeInput = document.getElementById('access-code');
+  const validateButton = document.getElementById('validate-button');
+
+  let countdownInterval = null;
+  let autoRefreshTimeout = null;
+
+  
+  function hideAllSections() {
+    codeInputSection.style.display = 'none';
+    loadingSection.style.display = 'none';
+    tooEarlySection.style.display = 'none';
+    canJoinSection.style.display = 'none';
+    endedSection.style.display = 'none';
+    invalidSection.style.display = 'none';
+    errorMessage.style.display = 'none';
+
+    
+    if (countdownInterval) {
+      clearInterval(countdownInterval);
+      countdownInterval = null;
+    }
+    if (autoRefreshTimeout) {
+      clearTimeout(autoRefreshTimeout);
+      autoRefreshTimeout = null;
+    }
+  }
+
+  
+  function showError(message) {
+    errorMessage.textContent = message;
+    errorMessage.style.display = 'block';
+  }
+
+  
+  function formatDateTime(isoString) {
+    const date = new Date(isoString);
+    return date.toLocaleString('en-US', {
+      weekday: 'long',
+      month: 'long',
+      day: 'numeric',
+      year: 'numeric',
+      hour: 'numeric',
+      minute: '2-digit',
+      timeZoneName: 'short'
+    });
+  }
+
+  
+  function startCountdown(minutesUntil) {
+    const countdownElement = document.getElementById('countdown-timer');
+    let totalSeconds = minutesUntil * 60;
+
+    
+    updateCountdownDisplay(totalSeconds);
+
+    
+    countdownInterval = setInterval(() => {
+      totalSeconds--;
+
+      if (totalSeconds <= 0) {
+        clearInterval(countdownInterval);
+        
+        window.location.reload();
+        return;
+      }
+
+      updateCountdownDisplay(totalSeconds);
+    }, 1000);
+  }
+
+  function updateCountdownDisplay(totalSeconds) {
+    const hours = Math.floor(totalSeconds / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    const seconds = totalSeconds % 60;
+
+    const countdownElement = document.getElementById('countdown-timer');
+
+    if (hours > 0) {
+      countdownElement.textContent =
+        `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+    } else {
+      countdownElement.textContent =
+        `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+    }
+  }
+
+  
+  async function validateAccessCode(code) {
+    hideAllSections();
+    loadingSection.style.display = 'block';
+
+    try {
+      const response = await fetch(`${API_BASE}/join/validate/${encodeURIComponent(code)}`);
+
+      if (!response.ok) {
+        throw new Error('Failed to validate access code');
+      }
+
+      const data = await response.json();
+
+      hideAllSections();
+
+      if (!data.valid) {
+        
+        invalidSection.style.display = 'block';
+        return;
+      }
+
+      
+      if (data.can_join) {
+        
+        document.getElementById('student-name-ready').textContent = data.student_name || 'Student';
+        document.getElementById('course-name-ready').textContent = data.course_name;
+        document.getElementById('join-button').href = data.meet_link;
+        canJoinSection.style.display = 'block';
+
+      } else if (data.reason === 'too_early') {
+        
+        document.getElementById('student-name-early').textContent = data.student_name || 'Student';
+        document.getElementById('course-name-early').textContent = data.course_name;
+        document.getElementById('start-time-early').textContent = formatDateTime(data.start_time);
+
+        tooEarlySection.style.display = 'block';
+        startCountdown(data.minutes_until);
+
+      } else if (data.reason === 'ended') {
+        
+        document.getElementById('course-name-ended').textContent = data.course_name;
+        const startTime = formatDateTime(data.start_time);
+        const endTime = formatDateTime(data.end_time);
+        document.getElementById('time-ended').textContent = `${startTime} - ${endTime}`;
+        endedSection.style.display = 'block';
+      }
+
+    } catch (err) {
+      console.error('Validation error:', err);
+      hideAllSections();
+      codeInputSection.style.display = 'block';
+      showError('Failed to validate access code. Please try again.');
+    }
+  }
+
+  
+  validateButton.addEventListener('click', () => {
+    const code = accessCodeInput.value.trim().toUpperCase();
+
+    if (!code) {
+      showError('Please enter your access code.');
+      return;
+    }
+
+    validateAccessCode(code);
+  });
+
+  
+  accessCodeInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+      validateButton.click();
+    }
+  });
+
+  
+  const urlParams = new URLSearchParams(window.location.search);
+  const codeFromUrl = urlParams.get('code');
+
+  if (codeFromUrl) {
+    
+    accessCodeInput.value = codeFromUrl;
+    validateAccessCode(codeFromUrl);
+  } else {
+    
+    codeInputSection.style.display = 'block';
+  }
+})();
+</script>
+
+  </main>
+
+  <footer>
+  <p>&copy; 2025 Shell Mastery. All rights reserved.</p>
+  <p>$ echo "Happy scripting!"</p>
+</footer>
+
+  <script src="https://shellmastery.com/js/main.js"></script>
+</body>
+</html>
