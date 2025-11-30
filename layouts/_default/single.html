@@ -87,13 +87,19 @@
       return;
     }
 
-    weekSelector.innerHTML = availableWeeks.map(week => `
-      <div class="week-option ${week.is_full ? 'full' : ''}"
+    // Only show weeks that have spots available (hide full weeks entirely)
+    const openWeeks = availableWeeks.filter(w => !w.is_full);
+
+    if (openWeeks.length === 0) {
+      weekSelector.innerHTML = '<div class="no-weeks">No available weeks at this time. Please check back later.</div>';
+      return;
+    }
+
+    weekSelector.innerHTML = openWeeks.map(week => `
+      <div class="week-option"
            data-year="${week.year}"
-           data-week="${week.week_number}"
-           ${week.is_full ? 'data-disabled="true"' : ''}>
+           data-week="${week.week_number}">
         <div class="week-date">${week.week_display}</div>
-        <div class="week-spots">${week.is_full ? 'FULL' : week.spots_available + ' spots left'}</div>
       </div>
     `).join('');
 
