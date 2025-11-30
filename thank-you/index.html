@@ -49,26 +49,107 @@
     
 <div class="thank-you">
   <div class="ascii-art pixelated-load">
- _____ _                 _     __   __          _ 
+ _____ _                 _     __   __          _
 |_   _| |__   __ _ _ __ | | __ \ \ / /__  _   _| |
   | | | '_ \ / _` | '_ \| |/ /  \ V / _ \| | | | |
   | | | | | | (_| | | | |   &lt;    | | (_) | |_| |_|
   |_| |_| |_|\__,_|_| |_|_|\_\   |_|\___/ \__,_(_)
   </div>
+
+  <h2>Payment Successful!</h2>
+
   
-  <h2>🎉 Payment Successful!</h2>
-  
-  <div class="terminal-window">
-    <span class="terminal-text"><p>Thank you for your purchase! You&rsquo;ll receive access details in your email shortly.</p>
-</span>
+  <div id="enrollment-details" class="enrollment-details" style="display: none;">
+    <div class="terminal-window enrollment-card">
+      <h3>Your Enrollment Details</h3>
+      <div class="detail-row">
+        <span class="detail-label">Course:</span>
+        <span id="detail-course" class="detail-value">-</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">First Class:</span>
+        <span id="detail-date" class="detail-value">-</span>
+      </div>
+      <div class="detail-row access-code-row">
+        <span class="detail-label">Access Code:</span>
+        <span id="detail-access-code" class="detail-value access-code">-</span>
+      </div>
+      <p class="access-code-note">Save this code! You'll need it to join your class.</p>
+    </div>
   </div>
+
   
+  <div id="enrollment-loading" class="terminal-window">
+    <span class="loading-text">Loading your enrollment details...</span>
+  </div>
+
+  
+  <div id="enrollment-fallback" style="display: none;">
+    <div class="terminal-window">
+      <span class="terminal-text"><p>Thank you for your purchase! You&rsquo;ll receive access details in your email shortly.</p>
+</span>
+    </div>
+  </div>
+
+  <p>Check your email for a confirmation with your access code and joining instructions.</p>
+
   <p>If you don't receive an email within 10 minutes, please check your spam folder or contact us at support@shellmastery.com.</p>
-  
+
   <p>Get ready to embark on your Bash scripting journey!</p>
-  
+
   <a href="https://shellmastery.com/" class="buy-button">Return to Home</a>
 </div>
+
+<script>
+(function() {
+  const API_BASE = 'https://api.shitchell.com/v1';
+
+  
+  const urlParams = new URLSearchParams(window.location.search);
+  const sessionId = urlParams.get('session_id');
+
+  const detailsDiv = document.getElementById('enrollment-details');
+  const loadingDiv = document.getElementById('enrollment-loading');
+  const fallbackDiv = document.getElementById('enrollment-fallback');
+
+  if (!sessionId) {
+    
+    loadingDiv.style.display = 'none';
+    fallbackDiv.style.display = 'block';
+    return;
+  }
+
+  
+  async function loadEnrollment() {
+    try {
+      const response = await fetch(`${API_BASE}/enrollments/by-session/${sessionId}`);
+
+      if (!response.ok) {
+        throw new Error('Enrollment not found');
+      }
+
+      const enrollment = await response.json();
+
+      
+      document.getElementById('detail-course').textContent = enrollment.course_name || 'Your Course';
+      document.getElementById('detail-date').textContent = enrollment.first_meeting || 'Check your email';
+      document.getElementById('detail-access-code').textContent = enrollment.access_code || '-';
+
+      
+      loadingDiv.style.display = 'none';
+      detailsDiv.style.display = 'block';
+
+    } catch (err) {
+      console.error('Failed to load enrollment:', err);
+      
+      loadingDiv.style.display = 'none';
+      fallbackDiv.style.display = 'block';
+    }
+  }
+
+  loadEnrollment();
+})();
+</script>
 
   </main>
 

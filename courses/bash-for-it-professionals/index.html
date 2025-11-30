@@ -47,14 +47,13 @@
 
   <main>
     
-<article class="course-page">
+<article class="course-page" data-product-id="course_bash_pro">
   <div class="course-header">
     <img src="https://shellmastery.com/img/logos/bash_professionals.png" alt="Bash for IT Professionals" class="course-logo">
     <div>
       <h2>Bash for IT Professionals</h2>
       <p>Streamline your IT workflow by mastering Bash scripting tailored specifically for everyday IT tasks.</p>
       <p><strong>Price: $59</strong></p>
-      <a href="https://buy.stripe.com/dRm8wHfCW4Y4cqm4Jy7wA03" class="buy-button">Enroll Now</a>
     </div>
   </div>
 
@@ -89,8 +88,185 @@
 
   </div>
 
-  <a href="https://buy.stripe.com/dRm8wHfCW4Y4cqm4Jy7wA03" class="buy-button">Enroll Now</a>
+  
+  <div class="enrollment-section">
+    <h3>Select Your Start Week</h3>
+    <div class="week-selector-container">
+      <div class="week-selector loading">
+        <div class="loading-text">Loading available weeks...</div>
+      </div>
+    </div>
+
+    <div class="enrollment-form" style="display: none;">
+      <div class="form-group">
+        <label for="student-name">Your Name</label>
+        <input type="text" id="student-name" placeholder="Jack Bauer" required>
+      </div>
+      <div class="form-group">
+        <label for="student-email">Your Email</label>
+        <input type="email" id="student-email" placeholder="jack@example.com" required>
+      </div>
+      <button class="buy-button enroll-button" disabled>Select a Week to Continue</button>
+    </div>
+
+    <div class="enrollment-error" style="display: none;"></div>
+  </div>
 </article>
+
+<script>
+(function() {
+  const API_BASE = 'https://api.shitchell.com/v1';
+  const productId = document.querySelector('.course-page').dataset.productId;
+
+  if (!productId) {
+    console.error('No product_id found for this course');
+    return;
+  }
+
+  const weekSelector = document.querySelector('.week-selector');
+  const enrollmentForm = document.querySelector('.enrollment-form');
+  const enrollButton = document.querySelector('.enroll-button');
+  const errorDiv = document.querySelector('.enrollment-error');
+
+  let selectedWeek = null;
+  let reservationToken = null;
+
+  
+  async function loadAvailableWeeks() {
+    try {
+      const response = await fetch(`${API_BASE}/courses/${productId}/available-weeks?num_weeks=8`);
+      if (!response.ok) throw new Error('Failed to load weeks');
+
+      const weeks = await response.json();
+      renderWeeks(weeks);
+      enrollmentForm.style.display = 'block';
+    } catch (err) {
+      weekSelector.innerHTML = '<div class="error-text">Failed to load available weeks. Please refresh.</div>';
+      console.error(err);
+    }
+  }
+
+  function renderWeeks(weeks) {
+    weekSelector.classList.remove('loading');
+
+    const availableWeeks = weeks.filter(w => w.is_available);
+
+    if (availableWeeks.length === 0) {
+      weekSelector.innerHTML = '<div class="no-weeks">No available weeks at this time. Please check back later.</div>';
+      return;
+    }
+
+    weekSelector.innerHTML = availableWeeks.map(week => `
+      <div class="week-option ${week.is_full ? 'full' : ''}"
+           data-year="${week.year}"
+           data-week="${week.week_number}"
+           ${week.is_full ? 'data-disabled="true"' : ''}>
+        <div class="week-date">${week.week_display}</div>
+        <div class="week-spots">${week.is_full ? 'FULL' : week.spots_available + ' spots left'}</div>
+      </div>
+    `).join('');
+
+    
+    weekSelector.querySelectorAll('.week-option:not([data-disabled])').forEach(option => {
+      option.addEventListener('click', () => selectWeek(option));
+    });
+  }
+
+  function selectWeek(option) {
+    
+    weekSelector.querySelectorAll('.week-option').forEach(o => o.classList.remove('selected'));
+
+    
+    option.classList.add('selected');
+    selectedWeek = {
+      year: parseInt(option.dataset.year),
+      week_number: parseInt(option.dataset.week)
+    };
+
+    enrollButton.disabled = false;
+    enrollButton.textContent = 'Proceed to Checkout →';
+  }
+
+  
+  enrollButton.addEventListener('click', async () => {
+    const name = document.getElementById('student-name').value.trim();
+    const email = document.getElementById('student-email').value.trim();
+
+    if (!name || !email) {
+      showError('Please enter your name and email.');
+      return;
+    }
+
+    if (!selectedWeek) {
+      showError('Please select a week.');
+      return;
+    }
+
+    enrollButton.disabled = true;
+    enrollButton.textContent = 'Creating checkout...';
+    errorDiv.style.display = 'none';
+
+    try {
+      
+      const reserveResponse = await fetch(`${API_BASE}/checkout/reserve`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          product_id: productId,
+          year: selectedWeek.year,
+          week_number: selectedWeek.week_number,
+          email: email
+        })
+      });
+
+      if (!reserveResponse.ok) {
+        const err = await reserveResponse.json();
+        throw new Error(err.detail || 'Failed to reserve spot');
+      }
+
+      const reservation = await reserveResponse.json();
+      reservationToken = reservation.reservation_token;
+
+      
+      const sessionResponse = await fetch(`${API_BASE}/checkout/create-session`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          product_id: productId,
+          year: selectedWeek.year,
+          week_number: selectedWeek.week_number,
+          email: email,
+          name: name,
+          reservation_token: reservationToken
+        })
+      });
+
+      if (!sessionResponse.ok) {
+        const err = await sessionResponse.json();
+        throw new Error(err.detail || 'Failed to create checkout');
+      }
+
+      const session = await sessionResponse.json();
+
+      
+      window.location.href = session.checkout_url;
+
+    } catch (err) {
+      showError(err.message);
+      enrollButton.disabled = false;
+      enrollButton.textContent = 'Proceed to Checkout →';
+    }
+  });
+
+  function showError(message) {
+    errorDiv.textContent = message;
+    errorDiv.style.display = 'block';
+  }
+
+  
+  loadAvailableWeeks();
+})();
+</script>
 
   </main>
 
