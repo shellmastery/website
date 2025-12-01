@@ -97,10 +97,10 @@
 
   
   <div class="enrollment-section">
-    <h3>Select Your Start Week</h3>
+    <h3>Select Your Course Dates</h3>
     <div class="week-selector-container">
       <div class="week-selector loading">
-        <div class="loading-text">Loading available weeks...</div>
+        <div class="loading-text">Loading available dates...</div>
       </div>
     </div>
 
@@ -175,7 +175,7 @@
       <div class="week-option"
            data-year="${week.year}"
            data-week="${week.week_number}">
-        <div class="week-date">${week.week_display}</div>
+        <div class="week-date">${week.course_dates_display}</div>
       </div>
     `).join('');
 
