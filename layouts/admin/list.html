@@ -58,9 +58,43 @@
     </div>
 
     <!-- Recent Enrollments Section -->
-    <div class="terminal-window">
+    <div class="terminal-window" style="margin-bottom: 2rem;">
       <h3 style="margin-top: 0; color: #00ffff; font-family: 'Source Code Pro', monospace;">Recent Enrollments</h3>
       <div id="enrollments-container" style="overflow-x: auto;">
+        <div class="loading-text">Loading...</div>
+      </div>
+    </div>
+
+    <!-- Blackout Dates Section -->
+    <div class="terminal-window">
+      <h3 style="margin-top: 0; color: #00ffff; font-family: 'Source Code Pro', monospace;">Blackout Dates</h3>
+
+      <!-- Add Blackout Form -->
+      <div style="margin-bottom: 1.5rem; padding: 1rem; background-color: rgba(0, 50, 0, 0.3); border-radius: 5px;">
+        <div style="display: flex; flex-wrap: wrap; gap: 1rem; align-items: flex-end;">
+          <div style="flex: 1; min-width: 120px;">
+            <label style="display: block; font-size: 0.8rem; color: #00aa00; margin-bottom: 0.3rem;">Start Date</label>
+            <input type="date" id="blackout-start" style="width: 100%; padding: 0.5rem; background: #001100; border: 1px solid #00ff00; color: #00ff00; font-family: 'Source Code Pro', monospace;">
+          </div>
+          <div style="flex: 1; min-width: 120px;">
+            <label style="display: block; font-size: 0.8rem; color: #00aa00; margin-bottom: 0.3rem;">End Date</label>
+            <input type="date" id="blackout-end" style="width: 100%; padding: 0.5rem; background: #001100; border: 1px solid #00ff00; color: #00ff00; font-family: 'Source Code Pro', monospace;">
+          </div>
+          <div style="flex: 2; min-width: 150px;">
+            <label style="display: block; font-size: 0.8rem; color: #00aa00; margin-bottom: 0.3rem;">Reason</label>
+            <input type="text" id="blackout-reason" placeholder="e.g., Holiday break" style="width: 100%; padding: 0.5rem; background: #001100; border: 1px solid #00ff00; color: #00ff00; font-family: 'Source Code Pro', monospace;">
+          </div>
+          <div>
+            <button id="add-blackout-button" class="buy-button" style="padding: 0.5rem 1rem; font-size: 0.9rem;">
+              + Add
+            </button>
+          </div>
+        </div>
+        <div id="blackout-error" style="display: none; margin-top: 0.5rem; color: #ff0000; font-size: 0.85rem;"></div>
+      </div>
+
+      <!-- Blackout List -->
+      <div id="blackouts-container" style="overflow-x: auto;">
         <div class="loading-text">Loading...</div>
       </div>
     </div>
@@ -192,6 +226,28 @@
   padding: 2rem;
   color: #666;
 }
+
+.delete-button {
+  padding: 0.3rem 0.6rem;
+  background-color: #330000;
+  color: #ff6666;
+  border: 1px solid #ff6666;
+  border-radius: 3px;
+  font-family: 'Source Code Pro', monospace;
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.delete-button:hover {
+  background-color: #ff6666;
+  color: #000;
+}
+
+.delete-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
 </style>
 
 <script>
@@ -269,7 +325,8 @@
     await Promise.all([
       loadStats(),
       loadUpcomingMeetings(),
-      loadRecentEnrollments()
+      loadRecentEnrollments(),
+      loadBlackoutDates()
     ]);
   }
 
@@ -494,6 +551,181 @@
     apiKey = null;
     showLogin();
   });
+
+  // Load blackout dates
+  async function loadBlackoutDates() {
+    const container = document.getElementById('blackouts-container');
+
+    try {
+      const response = await fetch(`${API_BASE}/admin/blackouts`, {
+        headers: { 'X-API-Key': apiKey }
+      });
+
+      if (!response.ok) throw new Error('Failed to load blackout dates');
+
+      const blackouts = await response.json();
+
+      if (blackouts.length === 0) {
+        container.innerHTML = '<div class="empty-state">No blackout dates configured</div>';
+        return;
+      }
+
+      const table = document.createElement('table');
+      table.className = 'data-table';
+
+      table.innerHTML = `
+        <thead>
+          <tr>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Reason</th>
+            <th>Applies To</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${blackouts.map(blackout => `
+            <tr>
+              <td>${formatDateOnly(blackout.start_date)}</td>
+              <td>${formatDateOnly(blackout.end_date)}</td>
+              <td>${escapeHtml(blackout.reason || '-')}</td>
+              <td>${blackout.course_id ? `Course #${blackout.course_id}` : '<span style="color: #00ffff;">All Courses</span>'}</td>
+              <td>
+                <button
+                  class="delete-button"
+                  onclick="deleteBlackout(${blackout.id}, this)"
+                >
+                  delete
+                </button>
+              </td>
+            </tr>
+          `).join('')}
+        </tbody>
+      `;
+
+      container.innerHTML = '';
+      container.appendChild(table);
+    } catch (err) {
+      console.error('Error loading blackout dates:', err);
+      container.innerHTML = '<div class="error-message">Failed to load blackout dates</div>';
+    }
+  }
+
+  // Add blackout date
+  async function addBlackout() {
+    const startDate = document.getElementById('blackout-start').value;
+    const endDate = document.getElementById('blackout-end').value;
+    const reason = document.getElementById('blackout-reason').value.trim();
+    const errorDiv = document.getElementById('blackout-error');
+    const button = document.getElementById('add-blackout-button');
+
+    errorDiv.style.display = 'none';
+
+    if (!startDate || !endDate) {
+      errorDiv.textContent = 'Please select both start and end dates';
+      errorDiv.style.display = 'block';
+      return;
+    }
+
+    if (new Date(endDate) < new Date(startDate)) {
+      errorDiv.textContent = 'End date must be after start date';
+      errorDiv.style.display = 'block';
+      return;
+    }
+
+    if (!reason) {
+      errorDiv.textContent = 'Please enter a reason';
+      errorDiv.style.display = 'block';
+      return;
+    }
+
+    button.disabled = true;
+    button.textContent = 'Adding...';
+
+    try {
+      const response = await fetch(`${API_BASE}/admin/blackouts`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-API-Key': apiKey
+        },
+        body: JSON.stringify({
+          start_date: startDate,
+          end_date: endDate,
+          reason: reason,
+          course_id: null  // Apply to all courses
+        })
+      });
+
+      if (!response.ok) {
+        const err = await response.json();
+        throw new Error(err.detail || 'Failed to add blackout');
+      }
+
+      // Clear form
+      document.getElementById('blackout-start').value = '';
+      document.getElementById('blackout-end').value = '';
+      document.getElementById('blackout-reason').value = '';
+
+      // Reload blackout list
+      await loadBlackoutDates();
+
+      button.textContent = 'Added!';
+      setTimeout(() => {
+        button.textContent = '+ Add';
+        button.disabled = false;
+      }, 1500);
+
+    } catch (err) {
+      console.error('Error adding blackout:', err);
+      errorDiv.textContent = err.message;
+      errorDiv.style.display = 'block';
+      button.textContent = '+ Add';
+      button.disabled = false;
+    }
+  }
+
+  // Delete blackout date
+  window.deleteBlackout = async function(blackoutId, button) {
+    if (!confirm('Delete this blackout date?')) return;
+
+    button.disabled = true;
+    const originalText = button.textContent;
+    button.textContent = 'deleting...';
+
+    try {
+      const response = await fetch(`${API_BASE}/admin/blackouts/${blackoutId}`, {
+        method: 'DELETE',
+        headers: { 'X-API-Key': apiKey }
+      });
+
+      if (!response.ok) throw new Error('Failed to delete blackout');
+
+      // Reload blackout list
+      await loadBlackoutDates();
+
+    } catch (err) {
+      console.error('Error deleting blackout:', err);
+      button.textContent = 'error';
+      setTimeout(() => {
+        button.textContent = originalText;
+        button.disabled = false;
+      }, 2000);
+    }
+  };
+
+  // Format date only (no time)
+  function formatDateOnly(dateString) {
+    const date = new Date(dateString + 'T00:00:00');
+    return date.toLocaleDateString('en-US', {
+      month: 'short',
+      day: 'numeric',
+      year: 'numeric'
+    });
+  }
+
+  // Handle add blackout button
+  document.getElementById('add-blackout-button').addEventListener('click', addBlackout);
 
   // Initialize
   init();
